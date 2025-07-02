@@ -1,0 +1,13 @@
+[package]
+name = "shard-manager"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tsdb-core = { path = "../tsdb-core" }
+serde = { workspace = true }
+ahash = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

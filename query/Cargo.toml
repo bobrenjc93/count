@@ -1,0 +1,15 @@
+[package]
+name = "query"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tsdb-core = { path = "../tsdb-core" }
+compression = { path = "../compression" }
+storage = { path = "../storage" }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
+criterion = { workspace = true }

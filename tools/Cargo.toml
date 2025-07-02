@@ -1,0 +1,12 @@
+[package]
+name = "tools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tsdb-core = { path = "../tsdb-core" }
+query = { path = "../query" }
+serde = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
