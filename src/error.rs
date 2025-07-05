@@ -16,6 +16,9 @@ pub enum CountError {
     
     #[error("Query error: {message}")]
     Query { message: String },
+    
+    #[error("Network error: {0}")]
+    NetworkError(String),
 }
 
 pub type CountResult<T> = Result<T, CountError>;

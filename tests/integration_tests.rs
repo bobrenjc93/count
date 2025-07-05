@@ -11,6 +11,11 @@ async fn test_basic_insert_and_query() {
         memory_buffer_size: 1000,
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
@@ -49,6 +54,11 @@ async fn test_aggregation_queries() {
         memory_buffer_size: 1000,
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
@@ -89,6 +99,11 @@ async fn test_memory_buffer_compression() {
         memory_buffer_size: 50, // Small buffer to trigger compression
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
@@ -121,6 +136,11 @@ async fn test_disk_persistence() {
         memory_buffer_size: 100,
         flush_interval_seconds: 1, // Quick flush for testing
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let series = SeriesKey::from("test.persistence");
@@ -159,6 +179,11 @@ async fn test_multiple_series() {
         memory_buffer_size: 1000,
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
@@ -202,6 +227,11 @@ async fn test_time_range_queries() {
         memory_buffer_size: 1000,
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
@@ -286,6 +316,11 @@ async fn test_high_throughput_insert() {
         memory_buffer_size: 10000,
         flush_interval_seconds: 60,
         data_dir: temp_dir.path().to_string_lossy().to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await.unwrap();
