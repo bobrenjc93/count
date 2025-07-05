@@ -1,0 +1,40 @@
+[package]
+name = "count"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+byteorder = "1.4"
+thiserror = "1.0"
+async-trait = "0.1"
+rand = "0.8"
+uuid = { version = "1.0", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+tokio-test = "0.4"
+tempfile = "3.0"
+
+[[bench]]
+name = "compression"
+harness = false
+
+[[bench]]
+name = "query"
+harness = false
+
+[lib]
+name = "count"
+path = "src/lib.rs"
+
+[[bin]]
+name = "count-cli"
+path = "src/bin/cli.rs"
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
