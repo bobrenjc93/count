@@ -8,11 +8,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("===================================");
     
     // Create database with custom configuration
-    let config = CountConfig {
-        memory_buffer_size: 5000,    // Keep 5000 points in memory per series
-        flush_interval_seconds: 300, // Flush to disk every 5 minutes
-        data_dir: "./example_data".to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 5000;    // Keep 5000 points in memory per series
+    config.flush_interval_seconds = 300; // Flush to disk every 5 minutes
+    config.data_dir = "./example_data".to_string();
     
     let db = CountDB::new(config).await?;
     

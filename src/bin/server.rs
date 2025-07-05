@@ -21,7 +21,7 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 use tower::ServiceBuilder;
 use tower_http::cors::CorsLayer;
-use tracing::{error, info, warn};
+use tracing::{error, info};
 
 type AppState = Arc<RwLock<ClusterCoordinator>>;
 
@@ -234,7 +234,7 @@ async fn handle_cluster_join(
 
     match coordinator.handle_gossip_message(message).await {
         Ok(_) => {
-            let cluster_state = coordinator.discovery.get_cluster_state().await;
+            let cluster_state = coordinator.get_discovery_service().get_cluster_state().await;
             Ok(Json(cluster_state))
         }
         Err(e) => {

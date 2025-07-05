@@ -7,11 +7,10 @@ use tokio::time::{sleep, Duration};
 #[tokio::test]
 async fn test_basic_insert_and_query() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 1000,
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 1000;
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let series = SeriesKey::from("test.basic");
@@ -45,11 +44,10 @@ async fn test_basic_insert_and_query() {
 #[tokio::test]
 async fn test_aggregation_queries() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 1000,
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 1000;
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let series = SeriesKey::from("test.aggregation");
@@ -85,11 +83,10 @@ async fn test_aggregation_queries() {
 #[tokio::test]
 async fn test_memory_buffer_compression() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 50, // Small buffer to trigger compression
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 50; // Small buffer to trigger compression
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let series = SeriesKey::from("test.compression");
@@ -117,11 +114,10 @@ async fn test_memory_buffer_compression() {
 #[tokio::test]
 async fn test_disk_persistence() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 100,
-        flush_interval_seconds: 1, // Quick flush for testing
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 100;
+    config.flush_interval_seconds = 1; // Quick flush for testing
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let series = SeriesKey::from("test.persistence");
     let base_time = get_current_timestamp();
@@ -155,11 +151,10 @@ async fn test_disk_persistence() {
 #[tokio::test]
 async fn test_multiple_series() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 1000,
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 1000;
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let base_time = get_current_timestamp();
@@ -198,11 +193,10 @@ async fn test_multiple_series() {
 #[tokio::test]
 async fn test_time_range_queries() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 1000,
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 1000;
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let series = SeriesKey::from("test.time_range");
@@ -282,11 +276,10 @@ async fn test_compression_algorithm_correctness() {
 #[tokio::test]
 async fn test_high_throughput_insert() {
     let temp_dir = TempDir::new().unwrap();
-    let config = CountConfig {
-        memory_buffer_size: 10000,
-        flush_interval_seconds: 60,
-        data_dir: temp_dir.path().to_string_lossy().to_string(),
-    };
+    let mut config = CountConfig::default();
+    config.memory_buffer_size = 10000;
+    config.flush_interval_seconds = 60;
+    config.data_dir = temp_dir.path().to_string_lossy().to_string();
     
     let db = CountDB::new(config).await.unwrap();
     let series = SeriesKey::from("test.throughput");

@@ -39,7 +39,7 @@ pub struct DistributedQueryRouter {
     hash_ring: Arc<RwLock<ConsistentHashRing>>,
     nodes: Arc<RwLock<HashMap<NodeId, Node>>>,
     client: reqwest::Client,
-    read_timeout: tokio::time::Duration,
+    _read_timeout: tokio::time::Duration,
 }
 
 impl DistributedQueryRouter {
@@ -53,7 +53,7 @@ impl DistributedQueryRouter {
             hash_ring,
             nodes,
             client: reqwest::Client::new(),
-            read_timeout: tokio::time::Duration::from_secs(30),
+            _read_timeout: tokio::time::Duration::from_secs(30),
         }
     }
 
@@ -402,14 +402,13 @@ impl DistributedQueryRouter {
 mod tests {
     use super::*;
     use crate::cluster::sharding::ConsistentHashRing;
-    use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
     #[tokio::test]
     async fn test_query_router() {
         let hash_ring = Arc::new(RwLock::new(ConsistentHashRing::new(150)));
         let nodes = Arc::new(RwLock::new(HashMap::new()));
         
-        let router = DistributedQueryRouter::new(1, hash_ring, nodes);
+        let _router = DistributedQueryRouter::new(1, hash_ring, nodes);
         
         let request = QueryRequest {
             series: "test.cpu".to_string(),

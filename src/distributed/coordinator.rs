@@ -7,8 +7,9 @@ use std::collections::HashMap;
 use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use tracing::{error, info, warn};
+use tracing::{info, warn};
 
+#[derive(Debug, Clone)]
 pub struct ClusterConfig {
     pub node_id: NodeId,
     pub bind_address: SocketAddr,
@@ -30,7 +31,7 @@ impl Default for ClusterConfig {
 }
 
 pub struct ClusterCoordinator {
-    local_node: Node,
+    _local_node: Node,
     config: ClusterConfig,
     hash_ring: Arc<RwLock<ConsistentHashRing>>,
     storage: Arc<RwLock<StorageEngine>>,
@@ -72,7 +73,7 @@ impl ClusterCoordinator {
 
         // Add local node to the hash ring
         {
-            let mut ring = hash_ring.write().await;
+            let ring = hash_ring.write().await;
             ring.add_node(cluster_config.node_id).await;
         }
 
@@ -83,7 +84,7 @@ impl ClusterCoordinator {
         }
 
         Ok(Self {
-            local_node,
+            _local_node: local_node,
             config: cluster_config,
             hash_ring,
             storage,
@@ -190,7 +191,7 @@ impl ClusterCoordinator {
 
         // Add to hash ring
         {
-            let mut hash_ring = self.hash_ring.write().await;
+            let hash_ring = self.hash_ring.write().await;
             hash_ring.add_node(node.id).await;
         }
 
@@ -211,7 +212,7 @@ impl ClusterCoordinator {
 
         // Remove from hash ring
         {
-            let mut hash_ring = self.hash_ring.write().await;
+            let hash_ring = self.hash_ring.write().await;
             hash_ring.remove_node(node_id).await;
         }
 
@@ -291,6 +292,10 @@ impl ClusterCoordinator {
 
         info!("Cluster coordinator shutdown complete");
         Ok(())
+    }
+
+    pub fn get_discovery_service(&self) -> &Arc<DiscoveryService> {
+        &self.discovery
     }
 }
 

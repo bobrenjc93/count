@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
-use tokio::time::{Duration, Instant};
+use tokio::time::Duration;
 
 pub type NodeId = u32;
 
