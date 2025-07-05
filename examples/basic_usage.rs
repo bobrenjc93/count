@@ -12,6 +12,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         memory_buffer_size: 5000,    // Keep 5000 points in memory per series
         flush_interval_seconds: 300, // Flush to disk every 5 minutes
         data_dir: "./example_data".to_string(),
+        cluster_enabled: false,
+        node_id: None,
+        bind_address: None,
+        seed_nodes: Vec::new(),
+        replication_factor: 2,
     };
     
     let db = CountDB::new(config).await?;

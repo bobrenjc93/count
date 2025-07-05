@@ -183,6 +183,11 @@ mod tests {
             memory_buffer_size: 100,
             flush_interval_seconds: 1,
             data_dir: temp_dir.path().to_string_lossy().to_string(),
+            cluster_enabled: false,
+            node_id: None,
+            bind_address: None,
+            seed_nodes: Vec::new(),
+            replication_factor: 2,
         };
         
         let mut engine = StorageEngine::new(&config).await.unwrap();
@@ -208,6 +213,11 @@ mod tests {
             memory_buffer_size: 100,
             flush_interval_seconds: 1,
             data_dir: temp_dir.path().to_string_lossy().to_string(),
+            cluster_enabled: false,
+            node_id: None,
+            bind_address: None,
+            seed_nodes: Vec::new(),
+            replication_factor: 2,
         };
         
         let mut engine = StorageEngine::new(&config).await.unwrap();
